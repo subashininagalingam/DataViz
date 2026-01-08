@@ -1,0 +1,16 @@
+/* Remove browser default margins */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Fix layout after Navbar */
+.page-container {
+  min-height: calc(100vh - 70px); /* 70px = your navbar height */
+  width: 100%;
+  padding: 0;        /* IMPORTANT */
+  margin: 0;         /* IMPORTANT */
+  overflow: hidden;  /* Prevent double scroll */
+  display: flex;
+}

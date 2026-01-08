@@ -1,0 +1,198 @@
+/* ========================= */
+/* 🌄 Reports Page Layout */
+/* ========================= */
+.reports-page {
+  min-height: 100vh;
+  background: #F5EFE7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================= */
+/* ✨ Background Glow */
+/* ========================= */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.45;
+  animation: float 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.glow1 {
+  width: 450px;
+  height: 450px;
+  background: #213555;
+  top: -120px;
+  left: -120px;
+}
+
+.glow2 {
+  width: 500px;
+  height: 500px;
+  background: #3E5879;
+  bottom: -150px;
+  right: -150px;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
+
+/* ========================= */
+/* 📦 Card Container */
+/* ========================= */
+.reports-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  z-index: 5;
+}
+
+/* ========================= */
+/* 📊 Table Styling */
+/* ========================= */
+.reports-table {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.reports-table thead th {
+  background: #213555;
+  color: #D8C4B6;
+  font-weight: 600;
+  padding: 14px;
+  text-align: center;
+  border: none;
+}
+
+.reports-table tbody td {
+  background: rgba(255, 255, 255, 0.95);
+  color: #213555;
+  padding: 12px;
+  border: none;
+  text-align: center;
+}
+
+.reports-table tbody tr:nth-child(even) td {
+  background: rgba(245, 239, 231, 0.9);
+}
+
+/* ========================= */
+/* 🔘 Buttons */
+/* ========================= */
+.view-btn {
+  border: 1px solid #3E5879 !important;
+  color: #3E5879 !important;
+  background: transparent !important;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #3E5879 !important;
+  color: #fff !important;
+}
+
+.delete-btn {
+  border: 1px solid #d62828 !important;
+  color: #d62828 !important;
+  background: transparent !important;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #d62828 !important;
+  color: #fff !important;
+}
+
+/* ========================= */
+/* 📊 Modal Chart */
+/* ========================= */
+.google-visualization-chart {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ========================= */
+/* 📱 Tablet View */
+/* ========================= */
+@media (max-width: 768px) {
+
+  .reports-page {
+    padding: 25px 12px;
+  }
+
+  .reports-card h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Table scroll */
+  .reports-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+
+  .reports-table thead th,
+  .reports-table tbody td {
+    padding: 10px;
+  }
+
+  /* Buttons stack */
+  .view-btn,
+  .delete-btn {
+    width: 100%;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+  }
+
+  .google-visualization-chart {
+    height: 280px !important;
+  }
+}
+
+/* ========================= */
+/* 📱 Mobile View */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .reports-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .reports-table {
+    font-size: 0.8rem;
+  }
+
+  .view-btn,
+  .delete-btn {
+    padding: 6px;
+  }
+
+  .google-visualization-chart {
+    height: 240px !important;
+  }
+}

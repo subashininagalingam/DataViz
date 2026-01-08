@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports | Data Visualization Dashboard</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ff;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e5ff;
+      text-shadow: 0 0 8px #00e5ff;
+    }
+
+    .container {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .upload-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      width: 70%;
+      max-width: 600px;
+      padding: 40px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .upload-box:hover {
+      border-color: #00e5ff;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+    }
+
+    .upload-box input[type="file"] {
+      display: none;
+    }
+
+    .upload-box label {
+      background: linear-gradient(135deg, #00e5ff, #00bcd4);
+      padding: 10px 25px;
+      border-radius: 8px;
+      color: #001219;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .upload-box label:hover {
+      background: #fff;
+      box-shadow: 0 0 20px #00e5ff;
+    }
+
+    .chart-area {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.1);
+    }
+
+    .chart-placeholder {
+      height: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      margin-top: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.1rem;
+    }
+
+    .history-section {
+      width: 90%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.1);
+      text-align: left;
+    }
+
+    .history-section h3 {
+      color: #00e5ff;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px #00e5ff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+    }
+
+    th {
+      color: #00e5ff;
+    }
+
+    tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #001219;
+    }
+
+    .view-btn {
+      background: linear-gradient(135deg, #00e5ff, #00bcd4);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+    }
+
+    .view-btn:hover {
+      background: #fff;
+      box-shadow: 0 0 15px #00e5ff;
+      transform: translateY(-2px);
+    }
+
+    .delete-btn {
+      background: linear-gradient(135deg, #ff5252, #ff1744);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 82, 82, 0.4);
+    }
+
+    .delete-btn:hover {
+      background: #fff;
+      color: #ff1744;
+      box-shadow: 0 0 15px #ff1744;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .upload-box {
+        width: 90%;
+        padding: 25px;
+      }
+      .chart-area, .history-section {
+        width: 95%;
+      }
+      table {
+        font-size: 0.85rem;
+      }
+      .btn {
+        padding: 5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Data Visualization Dashboard</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="report.html" style="color:#00e5ff;">Reports</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="upload-box">
+      <h2>📁 Upload Your Data File</h2>
+      <p>Supported formats: CSV, Excel, JSON</p>
+      <label for="file-upload">Choose File</label>
+      <input type="file" id="file-upload" />
+    </div>
+
+    <div class="chart-area">
+      <h2>📈 Visualization Preview</h2>
+      <div class="chart-placeholder">
+        Your data visualization will appear here
+      </div>
+    </div>
+
+    <div class="history-section">
+      <h3>📜 Upload History</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Upload Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>sales_report.csv</td>
+            <td>12 Nov 2025</td>
+            <td>✅ Processed</td>
+            <td>
+              <button class="btn view-btn">View</button>
+              <button class="btn delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>employee_data.xlsx</td>
+            <td>11 Nov 2025</td>
+            <td>✅ Processed</td>
+            <td>
+              <button class="btn view-btn">View</button>
+              <button class="btn delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>revenue.json</td>
+            <td>09 Nov 2025</td>
+            <td>⚙️ Processing</td>
+            <td>
+              <button class="btn view-btn">View</button>
+              <button class="btn delete-btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>© 2025 DataViz Dashboard | Designed with 💙</footer>
+</body>
+</html>

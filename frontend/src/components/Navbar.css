@@ -1,0 +1,95 @@
+/* 🔵 Navbar */
+.navbar {
+  width: 100%;
+  padding: 18px 30px;
+  background: #213555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* 🔷 Logo */
+.nav-logo {
+  color: #F5EFE7;
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 🔗 Links (Desktop) */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Links */
+.nav-link {
+  color: #F5EFE7;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  background: #F5EFE7;
+  color: #213555;
+}
+
+.nav-link.active {
+  background: #D8C4B6;
+  color: #213555;
+  font-weight: bold;
+}
+
+/* 🔴 Logout */
+.logout {
+  padding: 8px 14px;
+  background: #D9534F;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ☰ Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: #F5EFE7;
+  border-radius: 2px;
+}
+
+/* ================= */
+/* 📱 Mobile Only */
+/* ================= */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  /* hide menu by default */
+  .nav-links {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: #213555;
+    flex-direction: column;
+    width: 220px;
+    padding: 15px;
+    gap: 12px;
+    display: none; /* 👈 hidden */
+  }
+
+  /* show only on click */
+  .nav-links.show {
+    display: flex;
+  }
+}

@@ -1,0 +1,201 @@
+/* ===============================
+   🌄 PAGE WRAPPER
+================================ */
+.page-wrapper {
+  min-height: calc(100vh - 70px);
+  width: 100%;
+  background: #F5EFE7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===============================
+   🪟 MAIN GLASS CARD
+================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  padding: 30px;
+  width: 100%;
+  max-width: 950px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ===============================
+   🧠 HEADER
+================================ */
+.dashboard-header {
+  text-align: center;
+}
+
+.dash-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #213555;
+}
+
+.dash-sub {
+  font-size: 1.1rem;
+  color: #3E5879;
+  margin-top: 6px;
+}
+
+/* ===============================
+   📁 UPLOAD CARD
+================================ */
+.upload-card {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 26px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #213555;
+  margin-bottom: 16px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.file-input-new {
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #213555;
+}
+
+/* ===============================
+   🔘 BUTTONS
+================================ */
+.upload-btn-new,
+.download-btn,
+.popup-btn {
+  background: #213555;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.upload-btn-new:hover,
+.download-btn:hover,
+.popup-btn.ok:hover,
+.popup-btn.single:hover,
+.popup-btn.all:hover {
+  background: #1a2b45;
+  transform: translateY(-2px);
+}
+
+.popup-btn.cancel {
+  background: #ccc;
+  color: #333;
+}
+
+/* ===============================
+   📊 CHART CONTROLS
+================================ */
+.chart-controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-select-new {
+  padding: 12px;
+  min-width: 220px;
+  border-radius: 8px;
+  border: 1px solid #213555;
+  background: #fff;
+}
+
+/* ===============================
+   📈 CHART CARD
+================================ */
+.single-chart {
+  margin-top: 20px;
+}
+
+.glass-chart {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #213555;
+  margin-bottom: 12px;
+}
+
+/* ===============================
+   🪟 POPUPS
+================================ */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 26px;
+  width: 340px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+.popup-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* ===============================
+   📱 RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 20px;
+  }
+
+  .dash-title {
+    font-size: 1.8rem;
+  }
+
+  .chart-controls {
+    flex-direction: column;
+  }
+
+  .popup-box {
+    width: 90%;
+  }
+}

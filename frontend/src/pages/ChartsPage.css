@@ -1,0 +1,94 @@
+/* 🌌 Background */
+.charts-page {
+  min-height: 100vh;
+  background: #E8E4DF; /* Slightly darker than your register theme */
+  position: relative;
+  padding-bottom: 60px;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ✨ Glow Background Lights (Different Theme Colors) */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.55;
+  animation: float 6s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+.glow1 {
+  width: 380px;
+  height: 380px;
+  background: #1A3A5F;   /* Deep Blue */
+  top: -90px;
+  left: -80px;
+}
+
+.glow2 {
+  width: 450px;
+  height: 450px;
+  background: #6A4FAF;   /* Purple Glow */
+  bottom: -120px;
+  right: -120px;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(35px); }
+}
+
+/* 🏷️ Page Title */
+.charts-title {
+  color: #1D2E46;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(29, 46, 70, 0.3);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtitle */
+.charts-subtext {
+  color: #6A4FAF;
+  font-weight: 600;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 📊 Chart Card – Slightly Different Design */
+.chart-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid rgba(26, 58, 95, 0.25);
+  box-shadow: 0 0 22px rgba(26, 58, 95, 0.35);
+  transition: 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.chart-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(106, 79, 175, 0.45);
+  border-color: rgba(106, 79, 175, 0.6);
+}
+
+.chart-card h5 {
+  color: #1D2E46 !important;
+}
+
+/* Google Chart Glass BG */
+.chart-card .google-visualization-chart {
+  background: transparent !important;
+}

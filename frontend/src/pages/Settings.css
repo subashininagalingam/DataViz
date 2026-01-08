@@ -1,0 +1,186 @@
+/* ===== PAGE BASE ===== */
+.settings-page {
+  min-height: 100vh;
+  background: #F5EFE7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  padding: 40px 20px;
+}
+
+/* ===== CARD ===== */
+.settings-card {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== TEXT ===== */
+.settings-title {
+  text-align: center;
+  color: #213555;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.username-text {
+  text-align: center;
+  color: #3E5879;
+  margin-bottom: 25px;
+}
+
+.username-text span {
+  font-weight: 600;
+  color: #213555;
+}
+
+/* ===== SECTIONS ===== */
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section h4 {
+  color: #213555;
+  margin-bottom: 10px;
+}
+
+/* ===== INPUTS ===== */
+.settings-section select,
+.settings-section input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #213555;
+  background: white;
+}
+
+/* ===== TOGGLES ===== */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  color: #3E5879;
+  font-weight: 500;
+}
+
+/* ===== BUTTONS ===== */
+.theme-btn {
+  width: 100%;
+  background: #213555;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  opacity: 0.9;
+}
+
+.logout-btn {
+  width: 100%;
+  background: #d62828;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: #213555;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===== CONFIRM POPUP ===== */
+.confirm-box {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.confirm-content {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.yes-btn {
+  background: #d62828;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.no-btn {
+  background: #213555;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* ===== DARK MODE ===== */
+body.dark .settings-page {
+  background: #1e293b;
+}
+
+body.dark .settings-card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+body.dark .settings-title,
+body.dark .settings-section h4 {
+  color: #e5e7eb;
+}
+
+body.dark .username-text,
+body.dark .toggle {
+  color: #cbd5f5;
+}
+
+body.dark select,
+body.dark input {
+  background: #0f172a;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.history-item.dark {
+  background: #0f172a;
+  color: white;
+}
+
+.history-btn{
+  position: relative;
+  left: 45%;
+  bottom: 5%;
+}

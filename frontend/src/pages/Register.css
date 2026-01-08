@@ -1,0 +1,134 @@
+/* 🌄 Background */
+.register-page {
+  height: 100vh;
+  background: #F5EFE7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ✨ Glow background shapes */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.45;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.glow1 {
+  width: 350px;
+  height: 350px;
+  background: #213555;
+  top: -80px;
+  left: -80px;
+}
+
+.glow2 {
+  width: 450px;
+  height: 450px;
+  background: #3E5879;
+  bottom: -120px;
+  right: -120px;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
+
+/* 📦 Register Card */
+.register-card {
+  width: 360px;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(33, 53, 85, 0.4);
+  text-align: center;
+  animation: fadeUp 1.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Card animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🎯 Title */
+.register-card h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #213555;
+  margin-bottom: 22px;
+  text-shadow: 0 0 12px rgba(33, 53, 85, 0.3);
+}
+
+/* 📝 Input fields */
+.register-card input {
+  background: #F5EFE7;
+  border: 1px solid #D8C4B6;
+  border-radius: 10px;
+  padding: 12px;
+  color: #213555;
+  font-size: 1rem;
+}
+
+.register-card input:focus {
+  border-color: #3E5879;
+  box-shadow: 0 0 8px rgba(62, 88, 121, 0.4);
+}
+
+/* 🔘 Register button */
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background: #213555;
+  color: #F5EFE7;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  animation: pulse 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.register-btn:hover {
+  background: #3E5879;
+  transform: scale(1.07);
+}
+
+/* 🔗 Login link */
+.link-btn {
+  background: none;
+  border: none;
+  color: #3E5879;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: 0.3s ease;
+}
+
+.link-btn:hover {
+  color: #213555;
+  transform: scale(1.05);
+}

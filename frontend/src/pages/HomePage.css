@@ -1,0 +1,180 @@
+/* 🌄 Page Background */
+.homepage-container {
+  min-height: 100vh;
+  background: #F5EFE7;
+  position: relative;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* ✨ Fade Page */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 🌙 Floating Glow Elements */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.4;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.glow1 {
+  width: 350px;
+  height: 350px;
+  background: #213555;
+  top: -80px;
+  left: -80px;
+  animation-delay: 0.5s;
+}
+
+.glow2 {
+  width: 450px;
+  height: 450px;
+  background: #3E5879;
+  bottom: -120px;
+  right: -120px;
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(45px); }
+}
+
+/* 🔵 Navbar */
+.navbar {
+  width: 100%;
+  padding: 18px 40px;
+  background: #213555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  animation: slideDown 0.9s ease;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.brand {
+  color: #F5EFE7;
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 4px rgba(255,255,255,0.3);
+}
+
+/* 🔘 Navbar Buttons */
+.navbar-right .nav-btn {
+  margin-left: 12px;
+  padding: 8px 18px;
+  background: transparent;
+  border: 2px solid #F5EFE7;
+  border-radius: 6px;
+  color: #F5EFE7;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #F5EFE7;
+  color: #213555;
+  transform: scale(1.05);
+}
+
+.login {
+  background: transparent;
+}
+
+.register {
+  background: #D8C4B6;
+  color: #213555;
+  border-color: #D8C4B6;
+}
+
+.register:hover {
+  background: #F5EFE7;
+  border-color: #F5EFE7;
+  color: #213555;
+}
+
+/* 🌟 Hero Section */
+.hero {
+  text-align: center;
+  margin-top: 120px;
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  animation: fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+  font-size: 3rem;
+  color: #213555;
+  font-weight: 700;
+}
+
+.highlight {
+  color: #3E5879;
+  animation: glowText 3s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 5px #D8C4B6; }
+  to { text-shadow: 0 0 20px #3E5879; }
+}
+
+.hero-text {
+  color: #3E5879;
+  font-size: 1.2rem;
+  margin-top: 12px;
+}
+
+/* 🚀 Explore Button */
+.explore-btn {
+  margin-top: 35px;
+  background: #213555;
+  color: #F5EFE7;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2.4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+.explore-btn:hover {
+  background: #3E5879;
+  transform: scale(1.1);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.3rem;
+  }
+  .navbar {
+    padding: 14px 20px;
+  }
+}
