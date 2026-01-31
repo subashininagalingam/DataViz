@@ -7,30 +7,89 @@ import {
   Card,
   Container,
   Modal,
-  Form
+  Form,
 } from "react-bootstrap";
 import { Chart } from "react-google-charts";
 import "./Reports.css";
+
+/* ✅ Chart options */
+const CHART_OPTIONS = {
+  ColumnChart: {},
+  BarChart: {},
+  LineChart: {},
+  AreaChart: {},
+  PieChart: {},
+  Table: {
+    showRowNumber: true,
+    width: "100%",
+  },
+  ComboChart: {
+    seriesType: "bars",
+    series: { 1: { type: "line" } },
+  },
+};
+
+/* ✅ FIXED data formatter (NO STRING ERROR) */
+const prepareChartData = (rawData, chartType) => {
+  let formatted = [];
+
+  // Case 1: backend returns array of objects
+  if (Array.isArray(rawData) && rawData.length > 0) {
+    const headers = Object.keys(rawData[0]);
+
+    const rows = rawData.map((obj) =>
+      headers.map((h, index) => {
+        const value = obj[h];
+
+        // X-axis (first column) → string allowed
+        if (index === 0) return value;
+
+        // Y-axis → force number
+        const num = Number(value);
+        return isNaN(num) ? 0 : num;
+      })
+    );
+
+    formatted = [headers, ...rows];
+  }
+
+  // Case 2: backend returns { columns, data }
+  if (rawData?.columns && rawData?.data) {
+    formatted = [
+      rawData.columns,
+      ...rawData.data.map((row) =>
+        row.map((v, i) => (i === 0 ? v : Number(v) || 0))
+      ),
+    ];
+  }
+
+  // PieChart must have only 2 columns
+  if (chartType === "PieChart" && formatted.length > 0) {
+    formatted = formatted.map((row, i) =>
+      i === 0 ? row.slice(0, 2) : [row[0], Number(row[1]) || 0]
+    );
+  }
+
+  return formatted;
+};
 
 const Reports = ({ username }) => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Modal & chart state
   const [showModal, setShowModal] = useState(false);
   const [chartType, setChartType] = useState("");
   const [chartData, setChartData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loadingChart, setLoadingChart] = useState(false);
 
-  // Load reports list
+  /* ✅ Load reports */
   useEffect(() => {
     const loadReports = async () => {
       try {
         const res = await api.get(`/reports?username=${username}`);
         setReports(res.data);
-      } catch (err) {
-        console.error(err);
+      } catch {
         alert("❌ Failed to load reports");
       } finally {
         setLoading(false);
@@ -39,7 +98,6 @@ const Reports = ({ username }) => {
     loadReports();
   }, [username]);
 
-  // Open modal
   const openViewModal = (file) => {
     setSelectedFile(file);
     setChartType("");
@@ -47,64 +105,27 @@ const Reports = ({ username }) => {
     setShowModal(true);
   };
 
-  // View chart
+  /* ✅ View chart */
   const viewChart = async () => {
-    if (!chartType) {
-      alert("⚠ Please select chart type");
-      return;
-    }
-
-    if (!selectedFile) return;
+    if (!chartType) return alert("⚠ Select chart type");
 
     setLoadingChart(true);
-    setChartData([]);
-
     try {
       const res = await api.get(`/report/${selectedFile.id}/view`);
-      console.log("Chart API response:", res.data);
-
-      let formattedData = [];
-
-      // CASE 1: { columns, data }
-      if (res.data.columns && res.data.data) {
-        formattedData = [
-          res.data.columns,
-          ...res.data.data
-        ];
-      }
-      // CASE 2: array of objects
-      else if (Array.isArray(res.data) && res.data.length > 0) {
-        const headers = Object.keys(res.data[0]);
-        const rows = res.data.map(obj =>
-          headers.map(h => {
-            const value = obj[h];
-            // number convert (important for charts)
-            if (typeof value === "string" && !isNaN(value)) {
-              return Number(value);
-            }
-            return value;
-          })
-        );
-        formattedData = [headers, ...rows];
-      } else {
-        throw new Error("Invalid chart data");
-      }
-
-      setChartData(formattedData);
-    } catch (err) {
-      console.error(err);
+      const data = prepareChartData(res.data, chartType);
+      setChartData(data);
+    } catch {
       alert("❌ Failed to load chart");
     } finally {
       setLoadingChart(false);
     }
   };
 
-  // Delete report
-  const handleDelete = async (file_id) => {
-    if (!window.confirm("⚠ Delete permanently?")) return;
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete permanently?")) return;
     try {
-      await api.delete(`/report/${file_id}`);
-      setReports(prev => prev.filter(r => r.id !== file_id));
+      await api.delete(`/report/${id}`);
+      setReports((prev) => prev.filter((r) => r.id !== id));
     } catch {
       alert("❌ Delete failed");
     }
@@ -119,7 +140,7 @@ const Reports = ({ username }) => {
           {loading ? (
             <Spinner animation="border" />
           ) : (
-            <Table bordered hover responsive className="reports-table">
+            <Table bordered hover responsive>
               <thead>
                 <tr>
                   <th>#</th>
@@ -136,14 +157,13 @@ const Reports = ({ username }) => {
                     <td>{new Date(r.uploaded_at).toLocaleString()}</td>
                     <td>
                       <Button
-                        className="view-btn me-2"
+                        className="me-2"
                         onClick={() => openViewModal(r)}
                       >
                         View
                       </Button>
-
                       <Button
-                        className="delete-btn"
+                        variant="danger"
                         onClick={() => handleDelete(r.id)}
                       >
                         Delete
@@ -157,13 +177,8 @@ const Reports = ({ username }) => {
         </Card>
       </Container>
 
-      {/* Modal */}
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        size="lg"
-        centered
-      >
+      {/* ✅ Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>
             📊 Report — {selectedFile?.file_name}
@@ -171,7 +186,6 @@ const Reports = ({ username }) => {
         </Modal.Header>
 
         <Modal.Body>
-          {/* Chart selector */}
           <Form.Group className="mb-3">
             <Form.Label>Select Chart Type</Form.Label>
             <Form.Select
@@ -179,28 +193,30 @@ const Reports = ({ username }) => {
               onChange={(e) => setChartType(e.target.value)}
             >
               <option value="">-- Select --</option>
-              <option value="ColumnChart">Column Chart</option>
-              <option value="PieChart">Pie Chart</option>
+              <option value="ColumnChart">Column</option>
+              <option value="BarChart">Bar</option>
+              <option value="LineChart">Line</option>
+              <option value="AreaChart">Area</option>
+              <option value="PieChart">Pie</option>
+              <option value="ComboChart">Combo</option>
               <option value="Table">Table</option>
-              <option value="ComboChart">Combo Chart</option>
             </Form.Select>
           </Form.Group>
 
-          <Button variant="primary" onClick={viewChart}>
-            View Chart
-          </Button>
+          <Button onClick={viewChart}>View Chart</Button>
 
-          {/* Chart view */}
           <div className="mt-4">
             {loadingChart && <p>Loading chart...</p>}
 
             {!loadingChart && chartData.length > 0 && (
               <Chart
+                key={chartType} // 🔥 force re-render
                 chartType={chartType}
                 width="100%"
                 height="350px"
                 data={chartData}
-                loader={<p>Loading chart...</p>}
+                options={CHART_OPTIONS[chartType] || {}}
+                loader={<p>Loading...</p>}
               />
             )}
           </div>
