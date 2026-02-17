@@ -14,9 +14,6 @@ function App() {
   const [username, setUsername] = useState("");
   const [currentPage, setCurrentPage] = useState("welcome");
 
-  /* ======================
-     AUTH HANDLERS
-  ====================== */
   const handleLoginSuccess = (user) => {
     setUsername(user);
     setPage("app");
@@ -36,9 +33,6 @@ function App() {
     setCurrentPage("welcome");
   };
 
-  /* ======================
-     PUBLIC PAGES
-  ====================== */
   if (page === "home") {
     return (
       <HomePage
@@ -66,9 +60,6 @@ function App() {
     );
   }
 
-  /* ======================
-     APP PAGES
-  ====================== */
   if (page === "app") {
     const renderPage = () => {
       switch (currentPage) {
@@ -95,7 +86,7 @@ function App() {
               username={username}
               onLogout={handleLogout}
               goToDashboard={() => setCurrentPage("upload")}
-              goToReports={() => setCurrentPage("reports")} // ✅ HISTORY FIX
+              goToReports={() => setCurrentPage("reports")}
             />
           );
 
@@ -116,7 +107,6 @@ function App() {
           setPage={setCurrentPage}
           onLogout={handleLogout}
         />
-
         <div className="page-container">{renderPage()}</div>
       </>
     );
